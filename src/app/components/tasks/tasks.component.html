@@ -1,0 +1,35 @@
+@if (isAddingTask) {
+<app-new-task (close)="onCloseAddTask()" [userId]="userId"></app-new-task>
+}
+
+<!--*=========== start section ==============-->
+<section id="tasks" class="custom-scrollbar">
+  <header>
+    <div style="display: flex; flex-direction: row; gap: 8px">
+      <img
+        style="width: 35px; height: 35px; border-radius: 50%"
+        [src]="imagePath"
+        [alt]="name"
+      />
+      <h2>{{ name }}'s Tasks</h2>
+    </div>
+    <menu>
+      <button (click)="onStartAddingTask()">Add Task</button>
+    </menu>
+  </header>
+
+  <ul class="custom-scrollbar">
+    @for (task of selectedUserTasks; track task.id) {
+    <li>
+      <app-task [task]="task"></app-task>
+    </li>
+    } @if (selectedUserTasks.length === 0) {
+    <p
+      style="text-align: center; color: whitesmoke; text-transform: capitalize"
+    >
+      No tasks found 😢
+    </p>
+    }
+  </ul>
+</section>
+<!--*=========== end section ==============-->
